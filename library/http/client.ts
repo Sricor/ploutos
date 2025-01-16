@@ -1,51 +1,52 @@
-import axios, {
-  AxiosResponse,
-  AxiosRequestConfig,
-  RawAxiosRequestHeaders,
-} from "axios";
+import { HTTPClient } from "./http"
 
-const client = axios.create({
-  baseURL: "https://api.github.com",
-});
+import { Health } from "@/library/http/api/health";
 
-type githubFoundUser = {
-  login: string;
-  id: number;
-};
-
-type githubUser = {
-  login: string;
-  id: number;
-  followers: number;
-};
-
-(async () => {
-  const config: AxiosRequestConfig = {
-    headers: {
-      Accept: "application/vnd.github+json",
-    } as RawAxiosRequestHeaders,
-  };
-  const queryString: string = `q=${encodeURIComponent("followers:>=60000")}&sort=followers&order=desc`;
-
-  try {
-    const searchResponse: AxiosResponse = await client.get(
-      `/search/users?${queryString}`,
-      config,
-    );
-    const foundUsers: githubFoundUser[] = searchResponse.data.items;
-
-    const username: string = foundUsers[0].login;
-    const userResponse: AxiosResponse = await client.get(
-      `/users/${username}`,
-      config,
-    );
-    const user: githubUser = userResponse.data;
-    const followersCount = user.followers;
-
-    console.log(
-      `The most followed user on GitHub is "${username}" with ${followersCount} followers.`,
-    );
-  } catch (err) {
-    console.log(err);
+export class Client extends HTTPClient {
+  constructor() {
+    super("https://api.ioaths.com");
   }
-})();
+
+  public defaultHeader() {
+    return {
+      ...{ "Content-Type": "application/json" },
+    };
+  }
+
+  public get = (path: string, headers?: HeadersInit, body?: BodyInit) => {
+    return this.request("GET", path, headers, body);
+  };
+
+  public post = (path: string, headers?: HeadersInit, body?: BodyInit) => {
+    return this.request("POST", path, headers, body);
+  };
+
+  public response = async <T>(response: Response): Promise<T> => {
+    type APIResponse<T> = {
+      ok: boolean,
+      code: number,
+      message: string | null,
+      data: T
+    }
+
+    try {
+      let resp: APIResponse<T> = await response.json();
+
+      if (!resp.ok) {
+        throw new Error(resp.message || "Unknown error occurred");
+      }
+
+      return resp.data;
+    } catch (error) {
+      if (error instanceof SyntaxError) {
+        throw new Error("Invalid JSON response from server");
+      } else {
+        throw new Error("An unexpected error occurred");
+      }
+    }
+  };
+
+  health = new Health(this);
+}
+
+export const client = new Client();
