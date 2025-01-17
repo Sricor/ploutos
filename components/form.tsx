@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Form, Input, Button } from "@nextui-org/react";
@@ -52,5 +52,4 @@ export const SignForm = () => {
       )}
     </Form>
   );
-}
-
+};

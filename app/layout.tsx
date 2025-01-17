@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 import { Providers } from "./providers";
 
+import { Navbar } from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 
@@ -39,14 +40,21 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        {/* Navbar */}
+        <div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center">
+          <Navbar />
+        </div>
+
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
 
+            {/* 固定在底部并居中 */}
+
             <footer className="w-full flex items-center justify-center py-3">
-              
+              {/* Footer content */}
             </footer>
           </div>
         </Providers>
