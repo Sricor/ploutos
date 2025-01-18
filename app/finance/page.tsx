@@ -4,6 +4,10 @@ function UserTablePage() {
   return (
     <div>
       <UserTable />
+      <UserTable />
+      <UserTable />
+      <UserTable />
+      <UserTable />
     </div>
   );
 }

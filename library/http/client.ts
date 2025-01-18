@@ -1,4 +1,4 @@
-import { HTTPClient } from "./http"
+import { HTTPClient } from "./http";
 
 import { Health } from "@/library/http/api/health";
 
@@ -23,11 +23,11 @@ export class Client extends HTTPClient {
 
   public response = async <T>(response: Response): Promise<T> => {
     type APIResponse<T> = {
-      ok: boolean,
-      code: number,
-      message: string | null,
-      data: T
-    }
+      ok: boolean;
+      code: number;
+      message: string | null;
+      data: T;
+    };
 
     try {
       let resp: APIResponse<T> = await response.json();

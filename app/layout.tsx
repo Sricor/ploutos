@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import { MoonIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: {
@@ -26,6 +27,15 @@ export const viewport: Viewport = {
   ],
 };
 
+const navbar = [
+  { key: "sign", title: "Sign", href: "/sign" },
+  { key: "music", title: "Music" },
+  { key: "videos", title: "Videos" },
+  { key: "finance", title: "Finance", href: "/finance" },
+  { key: "person", title: "Person" },
+  { key: "theme", title: <MoonIcon /> },
+];
+
 export default function RootLayout({
   children,
 }: {
@@ -40,12 +50,12 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        {/* Navbar */}
-        <div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center">
-          <Navbar />
-        </div>
-
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+          {/* Navbar */}
+          <div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center">
+            <Navbar tabs={navbar} />
+          </div>
+
           <div className="relative flex flex-col h-screen">
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
