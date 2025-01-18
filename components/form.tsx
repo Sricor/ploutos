@@ -10,12 +10,11 @@ import {
   Card,
   CardBody,
 } from "@nextui-org/react";
-import { useRouter } from "next/router";
-import { useClient, updateClaim, selectClaim } from "@/context/client";
+import { useClient, updateLocalStorageClaim } from "@/context/client";
 
 export const SignForm = () => {
   const { client } = useClient();
-  
+
   const [selected, setSelected] = React.useState<string>("login");
   const [name, setName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -24,7 +23,8 @@ export const SignForm = () => {
     e.preventDefault();
     let person = await client.person.claim(name, password);
     client.claim = person.claim;
-    updateClaim(person.claim)
+
+    updateLocalStorageClaim(person.claim);
   };
 
   const handleSignUp = async (e: React.FormEvent) => {

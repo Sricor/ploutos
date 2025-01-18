@@ -1,4 +1,4 @@
-import { SimpleTable } from "@/components/table";
+import { TransactionList, CreateTransaction } from "@/components/table";
 
 const rows = [
   {
@@ -43,10 +43,9 @@ const columns = [
 ];
 
 async function UserTablePage() {
-  // console.log(await client.finance.transaction_list(1))
   return (
     <div>
-      <SimpleTable columns={columns} rows={rows}/>
+      <TransactionList />
     </div>
   );
 }

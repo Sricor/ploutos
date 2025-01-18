@@ -11,6 +11,7 @@ import { Client } from "@/lib/http/client";
 
 interface ClientContextType {
   client: Client;
+  isClientReady: boolean;
 }
 
 interface ClientProviderProps {
@@ -21,18 +22,20 @@ const ClientContext = createContext<ClientContextType | null>(null);
 
 export function ClientProvider({ children }: ClientProviderProps) {
   const [client] = useState(() => new Client());
+  const [isClientReady, setIsClientReady] = useState(false); // 新增状态
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const claim = localStorage.getItem("X-Access-Claim");
-      if (claim) {
-        client.claim = claim;
-      }
+    const claim = selectLocalStorageClaim();
+    if (claim) {
+      client.claim = claim;
+      setIsClientReady(true); // 设置 client 已准备好
+    } else {
+      setIsClientReady(false); // 如果没有 claim，client 未准备好
     }
   }, [client]);
 
   return (
-    <ClientContext.Provider value={{ client }}>
+    <ClientContext.Provider value={{ client, isClientReady }}>
       {children}
     </ClientContext.Provider>
   );
@@ -48,18 +51,18 @@ export function useClient() {
   return context;
 }
 
-export function updateClaim(claim: string) {
+export function updateLocalStorageClaim(claim: string) {
   if (typeof window !== "undefined") {
     return localStorage.setItem("X-Access-Claim", claim);
   }
 
-  return null
+  return null;
 }
 
-export function selectClaim() {
+export function selectLocalStorageClaim() {
   if (typeof window !== "undefined") {
     return localStorage.getItem("X-Access-Claim");
   }
 
-  return null
+  return null;
 }
