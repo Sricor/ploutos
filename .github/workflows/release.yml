@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Build
+        run: | 
+          pnpm install
+          pnpm build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@main
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.ACTION_ACCESS_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          force_orphan: false
+          cname: harmony.ioaths.com
