@@ -10,6 +10,25 @@ export class Person {
       timestamp: number;
     };
 
-    return this.client.response<Data>(await this.client.get(path));
+    return this.client.response<Data>(await this.client.post(path));
+  }
+
+  async claim(nickname: string, password: string) {
+    let path = `/person/claim`;
+
+    let payload = JSON.stringify({
+      nickname: nickname,
+      password: password,
+    });
+
+    let header = this.client.defaultHeader();
+    let resp = await this.client.post(path, header, payload);
+
+    type Data = {
+      claim: string;
+      expire: number;
+    };
+
+    return this.client.response<Data>(resp);
   }
 }

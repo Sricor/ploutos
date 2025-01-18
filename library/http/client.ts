@@ -1,10 +1,10 @@
-import { HTTPClient } from "./http";
-
+import { Person } from "@/library/http/api/person";
+import { HTTPClient } from "@/library/http/http";
 import { Health } from "@/library/http/api/health";
 
 export class Client extends HTTPClient {
   constructor() {
-    super("https://api.ioaths.com");
+    super(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:80");
   }
 
   public defaultHeader() {
@@ -47,6 +47,7 @@ export class Client extends HTTPClient {
   };
 
   health = new Health(this);
+  person = new Person(this);
 }
 
 export const client = new Client();

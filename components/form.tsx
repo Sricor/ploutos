@@ -20,30 +20,12 @@ export const SignForm = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(client.api);
-    alert((await client.health.ping()).timestamp);
+    console.log(await client.person.claim(name, password));
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    // try {
-    //   const response = await fetch("/api/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ name, password }),
-    //   });
-    //   const data = await response.json();
-    //   if (response.ok) {
-    //     localStorage.setItem("jwt", data.token);
-    //     router.push("/dashboard");
-    //   } else {
-    //     alert(data.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Sign up failed:", error);
-    // }
+    console.log((await client.health.ping()).timestamp);
   };
 
   return (
