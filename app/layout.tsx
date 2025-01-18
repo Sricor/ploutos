@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { MoonIcon } from "@/components/icons";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +33,7 @@ const navbar = [
   { key: "videos", title: "Videos" },
   { key: "finance", title: "Finance", href: "/finance" },
   { key: "person", title: "Person" },
-  { key: "theme", title: <MoonIcon /> },
+  { key: "theme", title: <ThemeSwitch /> },
 ];
 
 export default function RootLayout({

@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 export type TabItem = {
   key: string;
-  title: string | React.ReactNode;
+  title: React.ReactNode;
   href?: string;
 };
 

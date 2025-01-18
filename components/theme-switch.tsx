@@ -56,7 +56,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
         className={slots.wrapper({
           class: clsx(
             [
-              "w-auto h-auto",
+              "w-auto",
               "bg-transparent",
               "rounded-lg",
               "flex items-center justify-center",
@@ -71,9 +71,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
         })}
       >
         {!isSelected || isSSR ? (
-          <SunFilledIcon size={22} />
+          <SunFilledIcon size={20} />
         ) : (
-          <MoonFilledIcon size={22} />
+          <MoonFilledIcon size={20} />
         )}
       </div>
     </Component>
