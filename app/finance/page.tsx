@@ -1,13 +1,9 @@
-import { UserTable } from "@/components/table";
+import { SimpleTable } from "@/components/table";
 
 function UserTablePage() {
   return (
     <div>
-      <UserTable />
-      <UserTable />
-      <UserTable />
-      <UserTable />
-      <UserTable />
+      <SimpleTable />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Client } from "@/library/http/client";
+import { Client } from "@/lib/http/client";
 
 export class Health {
   constructor(private readonly client: Client) {}

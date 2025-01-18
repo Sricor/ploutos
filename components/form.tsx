@@ -11,16 +11,20 @@ import {
   CardBody,
 } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import { client } from "@/library/http/client";
+import { useClient } from "@/context/client";
 
 export const SignForm = () => {
+  const { client } = useClient();
+  
   const [selected, setSelected] = React.useState<string>("login");
   const [name, setName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(await client.person.claim(name, password));
+    let person = await client.person.claim(name, password);
+    client.claim = person.claim;
+    localStorage.setItem("access-claim", person.claim);
   };
 
   const handleSignUp = async (e: React.FormEvent) => {

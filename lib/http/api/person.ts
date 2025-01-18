@@ -1,4 +1,4 @@
-import { Client } from "@/library/http/client";
+import { Client } from "@/lib/http/client";
 
 export class Person {
   constructor(private readonly client: Client) {}
@@ -30,5 +30,9 @@ export class Person {
     };
 
     return this.client.response<Data>(resp);
+  }
+
+  async me() {
+    let path = `/`;
   }
 }

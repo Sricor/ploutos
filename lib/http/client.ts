@@ -1,14 +1,28 @@
-import { Person } from "@/library/http/api/person";
-import { HTTPClient } from "@/library/http/http";
-import { Health } from "@/library/http/api/health";
+import { Person } from "@/lib/http/api/person";
+import { HTTPClient } from "@/lib/http/http";
+import { Health } from "@/lib/http/api/health";
+import { Finance } from "./api/finance";
 
 export class Client extends HTTPClient {
+  #claim?: string;
+
+  public set claim(value: string) {
+    this.#claim = value;
+  }
+
   constructor() {
     super(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:80");
   }
 
   public defaultHeader() {
     return {
+      ...{ "Content-Type": "application/json" },
+    };
+  }
+
+  public accesstHeader() {
+    return {
+      ...{ "X-Access-Cliam": this.#claim ?? "" },
       ...{ "Content-Type": "application/json" },
     };
   }
@@ -48,6 +62,5 @@ export class Client extends HTTPClient {
 
   health = new Health(this);
   person = new Person(this);
+  finance = new Finance(this);
 }
-
-export const client = new Client();
