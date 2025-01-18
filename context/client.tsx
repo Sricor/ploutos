@@ -47,3 +47,19 @@ export function useClient() {
 
   return context;
 }
+
+export function updateClaim(claim: string) {
+  if (typeof window !== "undefined") {
+    return localStorage.setItem("X-Access-Claim", claim);
+  }
+
+  return null
+}
+
+export function selectClaim() {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("X-Access-Claim");
+  }
+
+  return null
+}

@@ -4,10 +4,9 @@ export class Finance {
   constructor(private readonly client: Client) {}
 
   async transaction_list(page: number) {
-    let path = `/finance/currency/transaction`;
+    let path = `/finance/currency/transaction?page=${page}`;
 
     let header = this.client.accesstHeader();
-    console.log(header)
     let resp = await this.client.get(path, header);
 
     type Data = {
