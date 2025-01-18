@@ -8,6 +8,7 @@ import { Navbar } from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { HeartFilledIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: {
@@ -28,11 +29,12 @@ export const viewport: Viewport = {
 };
 
 const navbar = [
-  { key: "sign", title: "Sign", href: "/sign" },
+  { key: "photos", title: "Photos", href: "/photos" },
   { key: "music", title: "Music" },
   { key: "videos", title: "Videos" },
   { key: "finance", title: "Finance", href: "/finance" },
   { key: "person", title: "Person" },
+  { key: "profile", title: <HeartFilledIcon size={18} />, href: "/sign" },
   { key: "theme", title: <ThemeSwitch /> },
 ];
 
