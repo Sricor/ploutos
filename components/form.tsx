@@ -24,7 +24,8 @@ export const SignForm = () => {
     e.preventDefault();
     let person = await client.person.claim(name, password);
     client.claim = person.claim;
-    localStorage.setItem("access-claim", person.claim);
+    localStorage.setItem("X-Access-Claim", person.claim);
+    console.log(await client.finance.transaction_list(1))
   };
 
   const handleSignUp = async (e: React.FormEvent) => {

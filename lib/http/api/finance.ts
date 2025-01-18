@@ -7,6 +7,7 @@ export class Finance {
     let path = `/finance/currency/transaction`;
 
     let header = this.client.accesstHeader();
+    console.log(header)
     let resp = await this.client.get(path, header);
 
     type Data = {

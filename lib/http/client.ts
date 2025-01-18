@@ -22,7 +22,7 @@ export class Client extends HTTPClient {
 
   public accesstHeader() {
     return {
-      ...{ "X-Access-Cliam": this.#claim ?? "" },
+      ...{ "X-Access-Claim": this.#claim ?? "" },
       ...{ "Content-Type": "application/json" },
     };
   }

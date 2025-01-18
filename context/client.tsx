@@ -24,7 +24,7 @@ export function ClientProvider({ children }: ClientProviderProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const claim = localStorage.getItem("claim");
+      const claim = localStorage.getItem("X-Access-Claim");
       if (claim) {
         client.claim = claim;
       }

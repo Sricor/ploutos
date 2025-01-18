@@ -10,49 +10,20 @@ import {
   getKeyValue,
 } from "@nextui-org/react";
 
-const rows = [
-  {
-    key: "1",
-    name: "Tony Reichert",
-    role: "CEO",
-    status: "Active",
-  },
-  {
-    key: "2",
-    name: "Zoey Lang",
-    role: "Technical Lead",
-    status: "Paused",
-  },
-  {
-    key: "3",
-    name: "Jane Fisher",
-    role: "Senior Developer",
-    status: "Active",
-  },
-  {
-    key: "4",
-    name: "William Howard",
-    role: "Community Manager",
-    status: "Vacation",
-  },
-];
+type SimpleTableProps = {
+  columns: {
+    key: string,
+    label: string
+  }[],
+  rows: {
+    key: string,
+    name: string,
+    role: string,
+    status: string
+  }[]
+}
 
-const columns = [
-  {
-    key: "name",
-    label: "NAME",
-  },
-  {
-    key: "role",
-    label: "ROLE",
-  },
-  {
-    key: "status",
-    label: "STATUS",
-  },
-];
-
-export const SimpleTable = () => {
+export const SimpleTable = ({columns, rows}: SimpleTableProps) => {
   return (
     <Table aria-label="Example table with dynamic content">
       <TableHeader columns={columns}>
